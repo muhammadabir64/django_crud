@@ -1,0 +1,63 @@
+{% include 'crud_db/header.html' %}
+
+<div class="container">
+<div class="row my-5">
+
+    <div class="col-6 mb-5 mx-auto">
+        {% if edit_form %}
+          <form method="POST">
+            {% csrf_token %}
+            {{ edit_form.as_p }}
+            <a href="{% url 'home' %}" class="btn btn-danger">Cancel</a>
+            <button type="submit" class="btn btn-primary" style="float: right;">Update</button>
+          </form>
+        {% else %}
+          <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success w-100">Add New</button>
+          </form>
+        {% endif %}
+    </div>
+    <div class="col-12">
+        <table class="table">
+            <thead class="bg-secondary text-light">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if data %}
+                {% for row in data %}
+              <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.name }}</td>
+                <td>{{ row.email }}</td>
+                <td>
+                    <a href="{% url 'edit' row.id %}" class="btn btn-warning">Edit</a>
+                    <form action="{% url 'delete' row.id %}" method="POST" class="d-inline">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+              </tr>
+              {% endfor %}
+              {% else %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>no data available!</td>
+                    <td></td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+    </div>
+
+</div>
+</div>
+
+{% include 'crud_db/footer.html' %}
