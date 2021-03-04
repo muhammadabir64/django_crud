@@ -24,4 +24,5 @@ $ your_dir/cd django_crud-main/python manage.py createsuperuser
 $ your_dir/cd django_crud-main/python manage.py runserver
 ```
 almost done! now you visit at: http://127.0.0.1:8000
+
 ![image](https://user-images.githubusercontent.com/51321911/109926286-03eeb100-7ced-11eb-88b0-655c16e09d85.png)
